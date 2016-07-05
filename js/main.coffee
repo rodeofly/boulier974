@@ -1,5 +1,6 @@
+N = 5
 $ ->
-  for i in [5..-5]
+  for i in [N..-N]
     unit = Math.pow 10, i
     html = """
       <div id='#{i}' class='tige'>
@@ -44,7 +45,7 @@ $ ->
     n = 0
     $( ".one.on"  ).each -> n += parseFloat( $(this).attr "data-unit" ) 
     $( ".five.on" ).each -> n += parseFloat( $(this).attr "data-unit" ) * 5
-    $( "#nombre" ).html n 
+    $( "#nombre" ).html n.toFixed(N)
     
 
   

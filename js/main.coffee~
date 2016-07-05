@@ -1,5 +1,6 @@
+N = 5
 $ ->
-  for i in [5..-5]
+  for i in [N..-N]
     unit = Math.pow 10, i
     html = """
       <div id='#{i}' class='tige'>
@@ -15,10 +16,10 @@ $ ->
     $( "#boulier" ).append html
     
     for j in [1..5]
-      $( "##{i} .unaire .deactivated" ).append "<div class='bille one off' data-unit=#{unit}>#{j}</div>"
+      $( "##{i} .unaire .deactivated" ).append "<div class='bille one off' data-unit=#{unit}></div>"
       
     for j in [1..2]
-      $( "##{i} .quinaire .deactivated" ).append "<div class='bille five off' data-unit=#{unit}>#{j}</div>"
+      $( "##{i} .quinaire .deactivated" ).append "<div class='bille five off' data-unit=#{unit}></div>"
   
   $( "#HV" ).on "click", ->
     $( "#boulier, .unit, .tige, .unaire, .quinaire, .activated, .deactivated, .bille" ).toggleClass "horizontal"
@@ -44,7 +45,7 @@ $ ->
     n = 0
     $( ".one.on"  ).each -> n += parseFloat( $(this).attr "data-unit" ) 
     $( ".five.on" ).each -> n += parseFloat( $(this).attr "data-unit" ) * 5
-    $( "#nombre" ).html n 
+    $( "#nombre" ).html n..toFixed(N)
     
 
   
