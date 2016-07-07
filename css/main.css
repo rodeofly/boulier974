@@ -259,7 +259,7 @@ background-position: center center;
 
 }
 
-.tige[data-unit='0'] {
+.tige[data-unit='0'] .billes {
   background : rgba(0,0,0,0.25);
 }
 
