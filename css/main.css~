@@ -156,191 +156,112 @@ nav a:hover {
  
 /* vertical */
 #wrapper {
-position : relative;
-width : 90vw;
+position:relative;
+display : block;
+margin : 0;
+width  : 90vh;
 height : 90vh;
 border : solid black 1px;
-margin : 4%;
 }
  
-#boulier {
-  width : 100%;
-  height : 100%;
+.boulier {
   position : absolute;
-  left : 0;
-  top : 0;
-  display : flex;
-  flex-direction: column;
+  display  : flex; 
+  flex-flow : column nowrap;
+  justify-content: space-between;
+  top      : 0;
+  left     : 0;
+  width    : 100%;
+  height   : 100%;
+  background-image   : url(./img/bg.svg);
+
+  background-repeat  : no-repeat repeat;
+  background-position: 71% 100%;
 }
-/* horizontal */
-#boulier.horizontal {
-  width : 100%;
-  height : 100%;
-  flex-direction: row;
+.boulier.horizontal {
+  transform : rotate(90deg)
 }
 
-
+.tpanel {
+  position : absolute; 
+}
 .unit {
-  width : auto;
-  height : 50px;
-  position : absolute;
-  right : -100px;
-  top: 0;
+  position:relative;
+
 }
 
 .tige {
-  width : 100%;
-  height : 8%; 
-  /*border-left : solid black 2px;*/
-  position : relative;
-  background : url('./img/h-line.svg') repeat-x center center;
-  
+  display : flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin   : auto ;
+  height : 50px;
+  width: 100%;
+  background : url(./img/h-line.svg) repeat-x center center;
 }
 
+.billes {
+  display : flex;
+  width   : 100%;
+  height  : 100%;
+  flex-flow: row nowrap;
+}
 .unaire {
-  position :absolute;
-  width : 60%;
-  height : 100%;
-  left:0;
+  display : flex;
+  margin : auto;
+  width : 70%;
+  height : 50px;
   border-right : solid black 4px;
-
 }
-
 .quinaire {
-  position :absolute;
-  width : 40%;
-  height: 100%;
-  right:0;
+  display : flex;
+  margin : auto;
+  width : 30%;
+  height: 50px;
   border-left : solid black 4px;
-
 }
-
 
 .deactivated, .activated {
-  position : absolute;
-  width : 50%;
-  height : 100%;
   display : flex;
-}
- 
-.unaire .deactivated {
-  left : 0;
-  flex-direction: row;
-  /*border :solid green 2px;*/
-}
+  width : 50%;
+  height : 50px;
 
-.unaire .activated {
+}
+.unaire .deactivated, .quinaire .activated {
+  left : 0;
+  bottom : 0;
+  flex-direction: row;
+}
+.unaire .activated, .quinaire .deactivated {
+  top : 0;
   right : 0;
   flex-direction: row-reverse;
-  /*border :solid red 2px;*/
-}
-
-.quinaire .deactivated {
-  right : 0;
-  /*border :solid green 2px;*/
-  flex-direction: row-reverse;
-
-}
-
-.quinaire .activated {
-  left : 0;
-  /*border :solid red 2px;*/
-  flex-direction: row;
-
 }
 
 .bille {
-margin : 2px;
-width : 25px;
-height : 90%;
-background-color: red;
-border : solid black 1px;
-border-radius : 5px;
+margin : auto 2px auto 2px;
+min-width  : 50px;
+min-height : 50px;
+background-image   : url(./img/pearl.svg);
+background-size    : cover;
+background-repeat  : no-repeat;
+background-position: center center;
 }
-
-
-
-
-
-.unit.horizontal {
-  left : 0px;
-  top: 100%;
-}
-
-.tige.horizontal {
-  /*border : solid black 2px;*/
-  position : relative;
-  display: inline-block;
-  width : 8%;
-  height : 100%;
-  background : url('./img/v-line.svg') repeat-y center center;
-}
-
-.unaire.horizontal {
-  position :absolute;
-  display: inline-table;;
-  vertical-align: bottom;
-  height : 60%;
-  width : 100%;
-  bottom:0;
-  border:none;
-  border-top : solid black 4px;
-
-}
-
-.quinaire.horizontal {
-  position :absolute;
-  height : 40%;
-  width: 100%;
-  top:0;
-  border : none;
-  border-bottom : solid black 4px;
-
-}
-
-.deactivated.horizontal, .activated.horizontal {
-  position : absolute;
-  display : flex;
-  height : 50%;
-  width : 100%;
-}
- 
-.unaire .deactivated.horizontal {
-  /*border :solid green 2px;*/
-  bottom : 0;
-  flex-direction: column-reverse;
-}
-
-.unaire .activated.horizontal {
-  /*border :solid red 2px;*/
-  top : 0;
-  flex-direction: column;
-}
-
-.quinaire .deactivated.horizontal {
-  /*border :solid green 2px;*/
-  top : 0;
-  flex-direction: column;
-}
-
-.quinaire .activated.horizontal {
-  /*border :solid red 2px;*/
-  bottom : 0;
-  flex-direction: column-reverse;
-}
-
 .bille.horizontal {
-  height : 25px;
-  width : 90%;
-  background-color: red;
+  margin : 2px auto 2px auto;
+}
 
-  border : solid black 1px;
+#x {
+  font-weight : bolder;
+  border : solid black 4px;
   border-radius : 5px;
+  padding : 0 5px 0 5px;
 
 }
 
-
-
+.tige[data-unit='1'] {
+  background : rgba(0,0,0,0.25);
+}
 
 
 /* ==========================================================================
