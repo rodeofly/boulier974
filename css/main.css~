@@ -155,10 +155,11 @@ nav a:hover {
    ========================================================================== */
  
 /* vertical */
-#wrappers {
+#wrapper {
   position : relative;
   display  : inline-block; 
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
 
 }
 .wrap {
@@ -172,7 +173,6 @@ nav a:hover {
 }
  
 .boulier {
-  margin : auto;
   position : relative;
   display  : inline-block; 
   width    : 100%;
@@ -182,32 +182,45 @@ nav a:hover {
   background-repeat  : no-repeat repeat;
   background-position: center;
 }
-.boulier.horizontal {
-  transform : rotate(90deg);
-  position:relative;
-  margin:9;
-  top:25vh;
-  left : 0;
-  width : 90vh;
+
+.bpanel {
+  width   : 50%;
+  z-index : 1000;
 }
 
 .tpanel {
   position : absolute;
+
 }
+
 .unit {
   position:relative;
-  display: inline-block;
+  display: block;
   white-space: nowrap;
   background-color : rgba(255,255,255,0.9);
 
 }
 
+.tiges {
+  display:flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  margin:auto;
+  width : 90%;
+  height : 90%;
+  
+} 
+.tiges.horizontal {
+  
+  transform : rotate(90deg);
+  width : 20%;
+}
+
 .tige {
   display : flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: space-around;
   margin:auto;
-  padding : 5px 0 5px 0;
   height : 50px;
   width: 80%;
   background : url(./img/h-line.svg) repeat-x center center;
@@ -225,6 +238,7 @@ nav a:hover {
   width : 70%;
   height : 50px;
   border-right : solid black 4px;
+  border-radius : 4px;
 }
 .quinaire {
   display : flex;
@@ -232,13 +246,13 @@ nav a:hover {
   width : 30%;
   height: 50px;
   border-left : solid black 4px;
+  border-radius : 4px;
 }
 
 .deactivated, .activated {
   display : flex;
   width : 50%;
   height : 50px;
-
 }
 .unaire .deactivated, .quinaire .activated {
   left : 0;
@@ -253,8 +267,10 @@ nav a:hover {
 
 .bille {
 margin : auto 2px auto 2px;
-min-width  : 2vw;
-min-height : 2vw;
+min-width  : 10px;
+min-height : 10px;
+width : 50px;
+height : 50px;
 background-image   : url(./img/pearl.svg);
 background-size    : cover;
 background-repeat  : no-repeat;
@@ -265,16 +281,17 @@ background-position: center center;
 }
 
 #x {
-  position:relative;
-  top : 0px;
-  right:0px;
-  font-size : 1.5em;
+  position : relative;
+  display : inline-block;
+  font-size : 1.25em;
+  line-height : 1.5em;
   font-weight : bolder;
   border : solid black 4px;
   border-radius : 5px;
-  padding : 0 5px 0 5px;
-
+  padding : 0 3px 0 3px;
 }
+
+
 .unit {
   font-size : 1em;
   line-height : 1em;

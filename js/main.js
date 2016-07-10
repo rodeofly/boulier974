@@ -35,7 +35,8 @@
         return max = d;
       }
     });
-    return $("#" + id + " #x").html(magnify(n.toFixed(Math.abs(min))));
+    n = n.toFixed(Math.abs(min));
+    return $("#" + id + " #x").html(magnify(n));
   };
 
   Bille = (function() {
@@ -72,10 +73,10 @@
       this.id = UID++;
       this.html = function() {
         var $boulier, bille, i, j, k, l, m, o, ref, tige;
-        $boulier = $("<div id='" + this.id + "' class='boulier' data-tiges='" + this.tiges + "'>\n  <div id='panel'>\n    <input type='range'  min='1' max='20' value='" + this.tiges + "' name='tselect' class='tselect'/>\n    <button class='init' data-id='" + this.id + "'>&#10026;</button>\n    <button class='toggle_orientation'    data-id='" + this.id + "'>&#8635; </button>\n    <button class='toggle_value'          data-id='" + this.id + "'>&#9746; </button>\n    <span id=\"x\">0</span>\n</div></div>");
+        $boulier = $("<div id='" + this.id + "' class='boulier' data-tiges='" + this.tiges + "'>\n  <div class='bpanel'>\n    <input type='range'  min='1' max='20' value='" + this.tiges + "' name='tselect' class='tselect'/>\n    <button class='init' data-id='" + this.id + "'>&#10026;</button>\n    <button class='toggle_orientation'    data-id='" + this.id + "'>&#8635; </button>\n    <button class='toggle_value'          data-id='" + this.id + "'>&#9746; </button>\n    <div id='x'>0</div>\n  </div>\n  <div class='tiges'></div>\n</div>");
         for (i = l = 0, ref = this.tiges - 1; 0 <= ref ? l <= ref : l >= ref; i = 0 <= ref ? ++l : --l) {
           tige = new Tige(i);
-          $boulier.append(tige.html());
+          $boulier.find(".tiges").append(tige.html());
           for (j = m = 1; m <= 5; j = ++m) {
             bille = new Bille(1);
             $boulier.find("#" + tige.id + " .unaire .deactivated").append(bille.html());
@@ -98,12 +99,20 @@
   })();
 
   $(function() {
+    var b1;
     $("body").on("click", ".init", function() {
-      var boulier, id, tiges;
+      var id, tiges;
       id = $(this).attr("data-id");
       tiges = parseInt($("#" + id).find(".tige").length);
-      return boulier = new Boulier(tiges, $("#wrappers"));
+      return new Boulier(tiges, $("#wrapper"));
     });
+    $("body").on("change", ".tselect", function() {
+      var id, v;
+      id = $(this).closest(".boulier").attr("id");
+      v = parseInt($(this).val());
+      return new Boulier(v, $("#wrapper"));
+    });
+    b1 = new Boulier(5, $("#wrapper"));
     $("body").on("click", ".toggle_value", function() {
       var id;
       id = $(this).attr("data-id");
@@ -112,26 +121,26 @@
     $("body").on("click", ".toggle_orientation", function() {
       var id;
       id = $(this).attr("data-id");
-      return $("#" + id).toggleClass("horizontal");
+      return $("#" + id + " .tiges").toggleClass("horizontal");
     });
     $("body").on("click", "input[name='unity']", function() {
       var id, tige;
       id = $(this).closest(".boulier").attr("id");
       tige = parseInt("" + ($(this).parent().parent().attr('data-unit')));
-      return $("#" + id + " .tige").each(function() {
+      $("#" + id + " .tige").each(function() {
         var p, v;
         p = tige - parseInt($(this).attr("data-unit"));
         v = Math.pow(10, p);
         $(this).attr("data-unit", p);
-        $(this).find(".unit").html(magnify(v.toString()));
-        return on_total(id);
+        return $(this).find(".unit").html(magnify(v.toString()));
       });
+      return on_total(id);
     });
-    $("body").on("click", ".bille", function() {
-      var bille, boulier_id, target, tige_id;
-      boulier_id = $(this).closest(".boulier").attr("id");
-      tige_id = $(this).closest(".tige").attr("id");
+    return $("body").on("click", ".bille", function() {
+      var bille, billes, boulier_id, target, tige_id;
       bille = $(this);
+      boulier_id = bille.closest(".boulier").attr("id");
+      tige_id = bille.closest(".tige").attr("id");
       if (bille.hasClass("one")) {
         if (bille.hasClass("off")) {
           target = $("#" + tige_id + " .unaire .activated");
@@ -145,16 +154,10 @@
           target = $("#" + tige_id + " .quinaire .deactivated");
         }
       }
-      target.append($(this).nextAll().andSelf().toggleClass("on off"));
+      billes = $(this).nextAll().andSelf();
+      target.append(billes.toggleClass("on off"));
       return on_total(boulier_id);
     });
-    $("body").on("change", ".tselect", function() {
-      var id, v;
-      v = $(this).val();
-      id = $(this).closest(".boulier").attr("id");
-      return new Boulier(parseInt(v), $("#wrappers"));
-    });
-    return new Boulier(5, $("#wrappers"));
   });
 
 }).call(this);
